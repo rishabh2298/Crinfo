@@ -3,8 +3,27 @@ package com.indianpolice.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class DataBase {
+	
+	private static String driverName;
+	private static String url;
+	private static String userName;
+	private static String userPassword;
+	
+	
+	static {
+		
+		ResourceBundle rsBundle = ResourceBundle.getBundle("dbDetails");
+		
+		driverName = rsBundle.getString("db");
+		url = rsBundle.getString("db.url");
+		userName = rsBundle.getString("db.userName");
+		userPassword = rsBundle.getString("db.userPassword");
+		
+	}
+	
 	
 	public static Connection getConnection() {
 
@@ -15,7 +34,7 @@ public class DataBase {
 		// Loading Driver to primary memory
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName(driverName);
 			
 		} catch (ClassNotFoundException e) {
 
@@ -24,14 +43,10 @@ public class DataBase {
 		
 		
 		
-		String url = "jdbc:mysql://localhost:3306/crime_information_management_system";
-		
-		
-		
 		// Making connection with database;
 		
 		try {
-			connection = DriverManager.getConnection(url,"root","root");
+			connection = DriverManager.getConnection(url,userName,userPassword);
 			
 			System.out.println("Database connection successful....");
 			

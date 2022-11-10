@@ -17,7 +17,7 @@ public class DataBase {
 		
 		ResourceBundle rsBundle = ResourceBundle.getBundle("dbDetails");
 		
-		driverName = rsBundle.getString("db");
+		driverName = rsBundle.getString("db.driverName");
 		url = rsBundle.getString("db.url");
 		userName = rsBundle.getString("db.userName");
 		userPassword = rsBundle.getString("db.userPassword");

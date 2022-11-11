@@ -13,6 +13,8 @@ import com.indianpolice.model.CriminalDetails;
 
 public interface DataAccessMethods {
 	
+	// This methods will implements in DataAccessMethodsImpl;
+	
 	public abstract List<CriminalDetails> getCriminalDetails(String crimeType) throws CriminalDetailsException;
 	
 	public abstract List<CrimeDetails> getCrimeDetails(String criminalName) throws CrimeDetailsException;
@@ -31,9 +33,9 @@ public interface DataAccessMethods {
 	
 	public abstract List getCrimeStatus(String status) throws CrimeDetailsException;
 	
-	public abstract List getCriminalDataBetweenAge(int age1, int age2) throws CriminalDetailsException;
-	
 	public abstract List getCriminalDataOfAge(int age) throws CriminalDetailsException;
+	
+	public abstract List getCriminalDataBetweenAge(int age1, int age2) throws CriminalDetailsException;
 	
 	public abstract List getCriminalOfGender(String gender) throws CriminalDetailsException;
 	

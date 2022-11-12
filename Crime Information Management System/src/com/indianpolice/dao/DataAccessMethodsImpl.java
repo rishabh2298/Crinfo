@@ -13,6 +13,7 @@ import com.indianpolice.exception.CriminalDetailsException;
 import com.indianpolice.exception.DepartmentException;
 import com.indianpolice.model.CrimeDetails;
 import com.indianpolice.model.CriminalDetails;
+import com.indianpolice.model.Department;
 
 public class DataAccessMethodsImpl implements DataAccessMethods {
 
@@ -310,46 +311,232 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 	}
 
 	
-	@Override
-	public List getReportOfDepartment(int departmentId) throws DepartmentException {
+	public List<CrimeDetails> getCrimeStatus(String status) throws CrimeDetailsException {
+		
+		List<CrimeDetails> crimeStatus = new ArrayList<>();
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from crimedetails where status=? order by department_id");
 
-		return null;
+			preparedStatement.setString(1, status);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				
+				String date = resultSet.getString("date");
+				String place = resultSet.getString("place");
+				String crimeType = resultSet.getString("crime_type");
+				String victim = resultSet.getString("victims");
+				String crimeDescription = resultSet.getString("crime_description");
+				String mainSuspect = resultSet.getString("main_suspect");
+				int departmentId = resultSet.getInt("department_id");
+				String stat = resultSet.getString("status");
+				
+				CrimeDetails crimeData = new CrimeDetails(date, place, crimeType, victim, crimeDescription, mainSuspect, departmentId, stat);
+				
+				crimeStatus.add(crimeData);
+				
+			}
+			
+		} catch (SQLException e) {
+
+			throw new CrimeDetailsException(e.getMessage());
+		}
+		
+		return crimeStatus;
+	}
+
+
+	@Override
+	public List<CriminalDetails> getCriminalDataOfAge(int criminalAge) throws CriminalDetailsException {
+
+		List<CriminalDetails> criminals = new ArrayList<>();
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from criminaldetails where age=? order by department_id");
+			
+			preparedStatement.setInt(1, criminalAge);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				String name = resultSet.getString("name");
+				int age = resultSet.getInt("age");
+				String gender = resultSet.getString("gender");
+				String address = resultSet.getString("address");
+				String identifyMark = resultSet.getString("identify_marks");
+				String arrestedArea = resultSet.getString("arrested_area");
+				String crime = resultSet.getString("crime_type");
+				int departmentId = resultSet.getInt("department_id");
+				
+				CriminalDetails criminalData = new CriminalDetails(name, age, gender, address, identifyMark, arrestedArea, crime, departmentId);
+
+				criminals.add(criminalData);
+				
+			}
+			
+			
+		} catch (SQLException e) {
+
+			throw new CriminalDetailsException(e.getMessage());
+		}
+		
+		return criminals;
 	}
 
 	@Override
-	public List getCrimeStatus(String status) throws CrimeDetailsException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CriminalDetails> getCriminalDataBetweenAge(int age1, int age2) throws CriminalDetailsException {
+		
+		List<CriminalDetails> criminals = new ArrayList<>();
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from criminaldetails where age>=? AND age<=? order by age");
+			
+			preparedStatement.setInt(1, age1);
+			preparedStatement.setInt(2, age2);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				String name = resultSet.getString("name");
+				int age = resultSet.getInt("age");
+				String gender = resultSet.getString("gender");
+				String address = resultSet.getString("address");
+				String identifyMark = resultSet.getString("identify_marks");
+				String arrestedArea = resultSet.getString("arrested_area");
+				String crime = resultSet.getString("crime_type");
+				int departmentId = resultSet.getInt("department_id");
+				
+				CriminalDetails criminalData = new CriminalDetails(name, age, gender, address, identifyMark, arrestedArea, crime, departmentId);
+
+				criminals.add(criminalData);
+				
+			}			
+			
+		} catch (SQLException e) {
+
+			throw new CriminalDetailsException(e.getMessage());
+		}
+		
+		return criminals;
 	}
 
 	@Override
-	public List getCriminalDataOfAge(int age) throws CriminalDetailsException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CriminalDetails> getCriminalOfGender(String criminalGender) throws CriminalDetailsException {
+		
+		List<CriminalDetails> criminals = new ArrayList<>();
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from criminaldetails where gender=? order by age");
+			
+			preparedStatement.setString(1, criminalGender);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				String name = resultSet.getString("name");
+				int age = resultSet.getInt("age");
+				String gender = resultSet.getString("gender");
+				String address = resultSet.getString("address");
+				String identifyMark = resultSet.getString("identify_marks");
+				String arrestedArea = resultSet.getString("arrested_area");
+				String crime = resultSet.getString("crime_type");
+				int departmentId = resultSet.getInt("department_id");
+				
+				CriminalDetails criminalData = new CriminalDetails(name, age, gender, address, identifyMark, arrestedArea, crime, departmentId);
+
+				criminals.add(criminalData);
+				
+			}			
+			
+		} catch (SQLException e) {
+
+			throw new CriminalDetailsException(e.getMessage());
+		}
+		
+		return criminals; 
 	}
 
-	@Override
-	public List getCriminalDataBetweenAge(int age1, int age2) throws CriminalDetailsException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List getCriminalOfGender(String gender) throws CriminalDetailsException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public List<CrimeDetails> totalCrime() throws CrimeDetailsException {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<CrimeDetails> totalCrimes = new ArrayList<>();
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from crimedetails order by department_id");
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				
+				String date = resultSet.getString("date");
+				String place = resultSet.getString("place");
+				String crimeType = resultSet.getString("crime_type");
+				String victim = resultSet.getString("victims");
+				String crimeDescription = resultSet.getString("crime_description");
+				String mainSuspect = resultSet.getString("main_suspect");
+				int departmentId = resultSet.getInt("department_id");
+				String stat = resultSet.getString("status");
+				
+				CrimeDetails crimeData = new CrimeDetails(date, place, crimeType, victim, crimeDescription, mainSuspect, departmentId, stat);
+				
+				totalCrimes.add(crimeData);
+				
+			}			
+			
+		} catch (SQLException e) {
+			
+			throw new CrimeDetailsException(e.getMessage());
+		}
+		
+		return totalCrimes;
 	}
+	
 
 	@Override
 	public List<CriminalDetails> totalCriminal() throws CriminalDetailsException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<CriminalDetails> totalCriminals = new ArrayList<>();
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from criminaldetails order by department_id");
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				String name = resultSet.getString("name");
+				int age = resultSet.getInt("age");
+				String gender = resultSet.getString("gender");
+				String address = resultSet.getString("address");
+				String identifyMark = resultSet.getString("identify_marks");
+				String arrestedArea = resultSet.getString("arrested_area");
+				String crime = resultSet.getString("crime_type");
+				int departmentId = resultSet.getInt("department_id");
+				
+				CriminalDetails criminalData = new CriminalDetails(name, age, gender, address, identifyMark, arrestedArea, crime, departmentId);
+
+				totalCriminals.add(criminalData);
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			throw new CriminalDetailsException(e.getMessage());
+		}
+		
+		return totalCriminals;
 	}
 
 	@Override
@@ -366,6 +553,28 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 
 	@Override
 	public String addCriminalDetails() throws CriminalDetailsException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Department editDepartment(String id) throws DepartmentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public CriminalDetails editCriminalDetails(String id, String criminalName, int criminalAge)
+			throws CriminalDetailsException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public CrimeDetails editCrimeDetails(String id, String crime_type, String victim) throws CrimeDetailsException {
 		// TODO Auto-generated method stub
 		return null;
 	}

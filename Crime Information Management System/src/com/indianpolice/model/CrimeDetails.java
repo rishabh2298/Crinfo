@@ -1,10 +1,8 @@
 package com.indianpolice.model;
 
-import java.time.LocalDate;
-
 public class CrimeDetails {
 	
-	private LocalDate date;
+	private String date;
 	private String place;
 	private String crimeType;
 	private String victim;
@@ -17,7 +15,7 @@ public class CrimeDetails {
 
 	}
 
-	public CrimeDetails(LocalDate date, String place, String crimeType, String victim, String crimeDescription,
+	public CrimeDetails(String date, String place, String crimeType, String victim, String crimeDescription,
 			String mainSuspect, int departmentId, String status) {
 		super();
 		this.date = date;
@@ -30,11 +28,11 @@ public class CrimeDetails {
 		this.status = status;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

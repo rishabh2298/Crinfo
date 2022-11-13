@@ -27,7 +27,7 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 		
 		try(Connection connection = DataBase.getConnection()){
 			
-			PreparedStatement preparedStatement = connection.prepareStatement(" select * from criminaldetails where crime_type=? order by age");
+			PreparedStatement preparedStatement = connection.prepareStatement(" select * from criminaldetails where crime_type=? order by age;");
 			
 			preparedStatement.setString(1,crimeType);
 			

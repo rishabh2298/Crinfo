@@ -92,4 +92,11 @@ public class CriminalDetails {
 		this.departmentId = departmentId;
 	}
 
+	@Override
+	public String toString() {
+		return "CriminalDetails [name=" + name + ", age=" + age + ", gender=" + gender + ", address=" + address
+				+ ", identifyMark=" + identifyMark + ", arrestedArea=" + arrestedArea + ", crimeType=" + crimeType
+				+ ", departmentId=" + departmentId + "]";
+	}
+
 }

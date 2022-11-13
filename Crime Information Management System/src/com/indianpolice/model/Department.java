@@ -61,4 +61,10 @@ public class Department {
 		this.zone = zone;
 	}
 
+	@Override
+	public String toString() {
+		return "Department [departmentId=" + departmentId + ", area=" + area + ", city=" + city + ", state=" + state
+				+ ", zone=" + zone + "]";
+	}
+
 }

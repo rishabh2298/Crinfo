@@ -92,4 +92,11 @@ public class CrimeDetails {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "CrimeDetails [date=" + date + ", place=" + place + ", crimeType=" + crimeType + ", victim=" + victim
+				+ ", crimeDescription=" + crimeDescription + ", mainSuspect=" + mainSuspect + ", departmentId="
+				+ departmentId + ", status=" + status + "]";
+	}
+
 }

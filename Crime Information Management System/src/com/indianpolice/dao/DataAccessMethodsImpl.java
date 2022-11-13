@@ -20,6 +20,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 	
 	@Override
 	public List<CriminalDetails> getCriminalDetails(String crimeType) throws CriminalDetailsException {
+		
+		int count = 0;
 
 		List<CriminalDetails> criminalList = new ArrayList<>();
 		
@@ -32,6 +34,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
+				
+				count++;
 				
 				String name = resultSet.getString("name");
 				int age = resultSet.getInt("age");
@@ -53,12 +57,16 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CriminalDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return criminalList;
 	}
 	
 
 	@Override
 	public List<CrimeDetails> getCrimeDetails(String criminalName) throws CrimeDetailsException {
+		
+		int count = 0;
 
 		List<CrimeDetails> crimeList = new ArrayList<>();
 		
@@ -71,6 +79,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while (resultSet.next()) {
+				
+				count++;
 				
 				String date = resultSet.getString("date");
 				String place = resultSet.getString("place");
@@ -90,6 +100,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			
 			throw new CrimeDetailsException(e.getMessage());
 		}
+		
+		System.out.println("Total Result = "+count);
 				
 		return crimeList;
 	}
@@ -97,6 +109,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 	
 	@Override
 	public List<CrimeDetails> getCrimeRecord(int departmentId) throws CrimeDetailsException {
+		
+		int count = 0;
 		
 		List<CrimeDetails> crimeRecord = new ArrayList<>();
 		
@@ -107,6 +121,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while (resultSet.next()) {
+				
+				count++;
 				
 				String date = resultSet.getString("date");
 				String place = resultSet.getString("place");
@@ -127,12 +143,16 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CrimeDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return crimeRecord;
 	}
 	
 
 	@Override
 	public List<CriminalDetails> getCriminalRecord(int departmentId) throws CriminalDetailsException {
+		
+		int count = 0;
 
 		List<CriminalDetails> criminalRecord = new ArrayList<>();
 		
@@ -145,6 +165,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
+				
+				count++;
 				
 				String name = resultSet.getString("name");
 				int age = resultSet.getInt("age");
@@ -167,12 +189,16 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CriminalDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return criminalRecord;
 	}
 
 	
 	@Override
 	public List<CrimeDetails> getFirStatus(String victim) throws CrimeDetailsException {
+		
+		int count = 0;
 
 		List<CrimeDetails> firStatus = new ArrayList<>();
 		
@@ -186,6 +212,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			
 			while (resultSet.next()) {
 				
+				count++;
+				
 				String date = resultSet.getString("date");
 				String place = resultSet.getString("place");
 				String crimeType = resultSet.getString("crime_type");
@@ -205,12 +233,16 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CrimeDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return firStatus;
 	}
 
 	
 	@Override
 	public List<CrimeDetails> getFirStatusOfDate(String firDate) throws CrimeDetailsException {
+		
+		int count = 0;
 		
 		List<CrimeDetails> firStatus = new ArrayList<>();
 
@@ -224,6 +256,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			
 			while (resultSet.next()) {
 				
+				count++;
+				
 				String date = resultSet.getString("date");
 				String place = resultSet.getString("place");
 				String crimeType = resultSet.getString("crime_type");
@@ -244,6 +278,7 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CrimeDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
 		
 		return firStatus;
 	}
@@ -251,6 +286,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 	
 	@Override
 	public List<CrimeDetails> getMonthlyCrimeReport(int departmentId, int month, int year) throws DepartmentException {
+		
+		int count = 0;
 		
 		int endDate=0;
 		
@@ -286,6 +323,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			
 			while (resultSet.next()) {
 				
+				count++;
+				
 				String date = resultSet.getString("date");
 				String place = resultSet.getString("place");
 				String crimeType = resultSet.getString("crime_type");
@@ -307,11 +346,15 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new DepartmentException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return monthlyReport;
 	}
 
 	
 	public List<CrimeDetails> getCrimeStatus(String status) throws CrimeDetailsException {
+		
+		int count = 0;
 		
 		List<CrimeDetails> crimeStatus = new ArrayList<>();
 		
@@ -324,6 +367,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
+				
+				count++;
 				
 				String date = resultSet.getString("date");
 				String place = resultSet.getString("place");
@@ -345,12 +390,16 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CrimeDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return crimeStatus;
 	}
 
 
 	@Override
 	public List<CriminalDetails> getCriminalDataOfAge(int criminalAge) throws CriminalDetailsException {
+		
+		int count = 0;
 
 		List<CriminalDetails> criminals = new ArrayList<>();
 		
@@ -363,6 +412,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
+				
+				count++;
 				
 				String name = resultSet.getString("name");
 				int age = resultSet.getInt("age");
@@ -385,11 +436,15 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CriminalDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return criminals;
 	}
 
 	@Override
 	public List<CriminalDetails> getCriminalDataBetweenAge(int age1, int age2) throws CriminalDetailsException {
+		
+		int count = 0;
 		
 		List<CriminalDetails> criminals = new ArrayList<>();
 		
@@ -404,6 +459,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			
 			while(resultSet.next()) {
 				
+				count++;
+				
 				String name = resultSet.getString("name");
 				int age = resultSet.getInt("age");
 				String gender = resultSet.getString("gender");
@@ -424,11 +481,15 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CriminalDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return criminals;
 	}
 
 	@Override
 	public List<CriminalDetails> getCriminalOfGender(String criminalGender) throws CriminalDetailsException {
+		
+		int count = 0;
 		
 		List<CriminalDetails> criminals = new ArrayList<>();
 		
@@ -442,6 +503,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			
 			while(resultSet.next()) {
 				
+				count++;
+				
 				String name = resultSet.getString("name");
 				int age = resultSet.getInt("age");
 				String gender = resultSet.getString("gender");
@@ -462,12 +525,16 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CriminalDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return criminals; 
 	}
 
 	
 	@Override
 	public List<CrimeDetails> totalCrime() throws CrimeDetailsException {
+		
+		int count = 0;
 
 		List<CrimeDetails> totalCrimes = new ArrayList<>();
 		
@@ -478,6 +545,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
+				
+				count++;
 				
 				String date = resultSet.getString("date");
 				String place = resultSet.getString("place");
@@ -499,12 +568,16 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			throw new CrimeDetailsException(e.getMessage());
 		}
 		
+		System.out.println("Total Result = "+count);
+		
 		return totalCrimes;
 	}
 	
 
 	@Override
 	public List<CriminalDetails> totalCriminal() throws CriminalDetailsException {
+		
+		int count = 0;
 		
 		List<CriminalDetails> totalCriminals = new ArrayList<>();
 		
@@ -515,6 +588,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
+				
+				count++;
 				
 				String name = resultSet.getString("name");
 				int age = resultSet.getInt("age");
@@ -535,6 +610,8 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			
 			throw new CriminalDetailsException(e.getMessage());
 		}
+		
+		System.out.println("Total Result = "+count);
 		
 		return totalCriminals;
 	}

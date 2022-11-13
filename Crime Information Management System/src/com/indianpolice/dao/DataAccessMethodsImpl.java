@@ -540,43 +540,242 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 	}
 
 	@Override
-	public String addDepartmentDetails() throws DepartmentException {
-		// TODO Auto-generated method stub
-		return null;
+	public String addDepartmentDetails(Department department) throws DepartmentException {
+		
+		String message = "Department not added.....";
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("insert into department values(?,?,?,?,?)");
+			
+			preparedStatement.setInt(1, department.getDepartmentId());
+			preparedStatement.setString(2, department.getArea());
+			preparedStatement.setString(3, department.getCity());
+			preparedStatement.setString(4, department.getState());
+			preparedStatement.setString(5, department.getZone());
+			
+			int status = preparedStatement.executeUpdate();
+			
+			if(status>0) {
+				message = "Department added successfully...";
+			}
+			
+		} catch (SQLException e) {
+
+			throw new DepartmentException(e.getMessage());
+		}
+		
+		return message;
 	}
+
+	
+	@Override
+	public String addCrimeDetails(CrimeDetails crime) throws CrimeDetailsException {
+		
+		String message = "Fail to add Crime Details....";
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(" insert into crimedetails values(?,?,?,?,?,?,?,?)");
+			
+			preparedStatement.setString(1, crime.getDate());
+			preparedStatement.setString(2, crime.getPlace());
+			preparedStatement.setString(3, crime.getCrimeType());
+			preparedStatement.setString(4, crime.getVictim());
+			preparedStatement.setString(5, crime.getCrimeDescription());
+			preparedStatement.setString(6, crime.getMainSuspect());
+			preparedStatement.setInt(7, crime.getDepartmentId());
+			preparedStatement.setString(8, crime.getStatus());
+			
+			int status = preparedStatement.executeUpdate();
+			
+			if(status>0)
+				message = "Crime Details added successfully....";
+			
+		} catch (SQLException e) {
+
+			throw new CrimeDetailsException(e.getMessage());
+		}
+		
+		return message;
+	}
+
+	
+	@Override
+	public String addCriminalDetails(CriminalDetails criminal) throws CriminalDetailsException {
+		
+		String message = "Fail to add Criminal Details....";
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("insert into criminaldetails values(?,?,?,?,?,?,?,?)");
+			
+			preparedStatement.setString(1, criminal.getName());
+			preparedStatement.setInt(2, criminal.getAge());
+			preparedStatement.setString(3, criminal.getGender());
+			preparedStatement.setString(4, criminal.getAddress());
+			preparedStatement.setString(5, criminal.getIdentifyMark());
+			preparedStatement.setString(6, criminal.getArrestedArea());
+			preparedStatement.setString(7, criminal.getCrimeType());
+			preparedStatement.setInt(8, criminal.getDepartmentId());
+			
+			
+			int status = preparedStatement.executeUpdate();
+			
+			if(status>0)
+				message = "Criminal data added successfully....";
+			
+		} catch (SQLException e) {
+
+			throw new CriminalDetailsException(e.getMessage());
+		}
+		
+		return message;
+	}
+
 
 	@Override
-	public String addCrimeDetails() throws CrimeDetailsException {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateDepartment(String column, String value, int id) throws DepartmentException {
+		
+		String message = "Fail to update the department...";
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(" update department set ?=? where department_id=?");
+			
+			preparedStatement.setString(1, column);
+			preparedStatement.setString(2, value);
+			preparedStatement.setInt(3, id);
+			
+			int status = preparedStatement.executeUpdate();
+			
+			if(status>0)
+				message = "Department "+id+" updated successfully...";
+			
+		} catch (SQLException e) {
+
+			throw new DepartmentException(e.getMessage());
+		}
+		
+		return message;
 	}
+	
+	
+	@Override
+	public String updateDepartment(String column, int value, int id) throws DepartmentException {
+
+		String message = "Fail to update the department...";
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(" update department set ?=? where department_id=?");
+			
+			preparedStatement.setString(1, column);
+			preparedStatement.setInt(2, value);
+			preparedStatement.setInt(3, id);
+			
+			int status = preparedStatement.executeUpdate();
+			
+			if(status>0)
+				message = "Department "+id+" updated successfully...";
+			
+		} catch (SQLException e) {
+
+			throw new DepartmentException(e.getMessage());
+		}
+		
+		return message;
+	}
+	
+	
+	@Override
+	public String updateCriminalDetails(String column, int value, String name, int departmentId) throws CriminalDetailsException {
+
+		String message = "Fail to update criminal details......";
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("update criminaldetails set ?=? where name=? AND department_id=?");
+			
+			preparedStatement.setString(1, column);
+			preparedStatement.setInt(2, value);
+			preparedStatement.setString(3, name);
+			preparedStatement.setInt(4, departmentId);
+			
+			int status = preparedStatement.executeUpdate();
+			
+			if(status>0) {
+				message = "Criminal record has been updated....";
+			}
+			
+			
+		} catch (SQLException e) {
+
+			throw new CriminalDetailsException(e.getMessage());
+		}
+		
+		return message;
+	}	
+
 
 	@Override
-	public String addCriminalDetails() throws CriminalDetailsException {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateCriminalDetails(String column, String value, String name, int departmentId) throws CriminalDetailsException {
+		
+		String message = "Fail to update criminal details......";
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("update criminaldetails set ?=? where name=? AND department_id=?");
+			
+			preparedStatement.setString(1, column);
+			preparedStatement.setString(2, value);
+			preparedStatement.setString(3, name);
+			preparedStatement.setInt(4, departmentId);
+			
+			int status = preparedStatement.executeUpdate();
+			
+			if(status>0) {
+				message = "Criminal record has been updated...";
+			}
+			
+			
+		} catch (SQLException e) {
+
+			throw new CriminalDetailsException(e.getMessage());
+		}
+		
+		return message;
 	}
 
 
 	@Override
-	public Department editDepartment(String id) throws DepartmentException {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateCrimeDetails(String column, String value, String victim, String mainSuspect , int departmentId) throws CrimeDetailsException {
+
+		String message = "Fail to update crime details....";
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("update crimedetails set ?=? where victims=? AND main_suspect=? AND department_id=?");
+			
+			preparedStatement.setString(1, column);
+			preparedStatement.setString(2, value);
+			preparedStatement.setString(3, victim);
+			preparedStatement.setString(4, mainSuspect);
+			preparedStatement.setInt(5, departmentId);
+			
+			int status = preparedStatement.executeUpdate();
+			
+			if(status>0)
+				message = "Crime Record has been updated...";
+			
+			
+		} catch (SQLException e) {
+
+			throw new CrimeDetailsException(e.getMessage());
+		}
+		
+		return message;
 	}
 
-
-	@Override
-	public CriminalDetails editCriminalDetails(String id, String criminalName, int criminalAge)
-			throws CriminalDetailsException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public CrimeDetails editCrimeDetails(String id, String crime_type, String victim) throws CrimeDetailsException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

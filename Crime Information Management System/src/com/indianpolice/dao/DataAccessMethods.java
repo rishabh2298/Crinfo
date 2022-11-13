@@ -11,11 +11,11 @@ import com.indianpolice.model.Department;
 
 public interface DataAccessMethods {
 	
-	public abstract String addDepartmentDetails() throws DepartmentException;
+	public abstract String addDepartmentDetails(Department department) throws DepartmentException;
 	
-	public abstract String addCrimeDetails() throws CrimeDetailsException;
+	public abstract String addCrimeDetails(CrimeDetails crime) throws CrimeDetailsException;
 	
-	public abstract String addCriminalDetails() throws CriminalDetailsException;
+	public abstract String addCriminalDetails(CriminalDetails criminal) throws CriminalDetailsException;
 	
 	public abstract List<CriminalDetails> getCriminalDetails(String crimeType) throws CriminalDetailsException;
 	
@@ -43,10 +43,14 @@ public interface DataAccessMethods {
 	
 	public abstract List<CriminalDetails> totalCriminal() throws CriminalDetailsException;
 	
-	public abstract Department editDepartment(String id) throws DepartmentException;
+	public abstract String updateDepartment(String column, String value, int id) throws DepartmentException;
 	
-	public abstract CriminalDetails editCriminalDetails(String id, String criminalName, int criminalAge) throws CriminalDetailsException;
+	public abstract String updateDepartment(String column, int value, int id) throws DepartmentException;
 	
-	public abstract CrimeDetails editCrimeDetails(String id, String crime_type, String victim) throws CrimeDetailsException; 
+	public abstract String updateCriminalDetails(String column, String value,String name, int departmentId) throws CriminalDetailsException;
+	
+	public abstract String updateCriminalDetails(String column, int value,String name, int departmentId) throws CriminalDetailsException;
+	
+	public abstract String updateCrimeDetails(String column, String value, String victim, String mainSuspect ,int departmentId) throws CrimeDetailsException; 
 	
 }

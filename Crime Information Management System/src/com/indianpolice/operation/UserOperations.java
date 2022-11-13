@@ -1,5 +1,6 @@
 package com.indianpolice.operation;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.indianpolice.usecases.AddCrimeDetails;
@@ -12,15 +13,23 @@ import com.indianpolice.usecases.GetCriminalDataBetweenAge;
 import com.indianpolice.usecases.GetCriminalDataOfAge;
 import com.indianpolice.usecases.GetCriminalDetails;
 import com.indianpolice.usecases.GetCriminalRecord;
+import com.indianpolice.usecases.GetCriminalsOfGender;
 import com.indianpolice.usecases.GetFirStatusByDate;
 import com.indianpolice.usecases.GetFirStatusByVictim;
 import com.indianpolice.usecases.GetMonthlyCrimeReport;
+import com.indianpolice.usecases.TotalCrime;
+import com.indianpolice.usecases.TotalCriminal;
+import com.indianpolice.usecases.UpdateCrimeDetails;
+import com.indianpolice.usecases.UpdateCriminalDetails01;
+import com.indianpolice.usecases.UpdateCriminalDetails02;
+import com.indianpolice.usecases.UpdateDepartment01;
+import com.indianpolice.usecases.UpdateDepartment02;
 
 public class UserOperations {
 	
 	public static void main(String[] args) {
 		
-		Scanner input = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println();
 		System.out.println("..........Welcome to Crinfo..........");
@@ -35,9 +44,10 @@ public class UserOperations {
 		System.out.println();
 		System.out.println();
 		
-		String command = input.next();
+		String command = scanner.next();
 		
-		while(!command.equalsIgnoreCase("Exit")) {
+		if(!command.equalsIgnoreCase("Exit")) {
+			
 			System.out.println();
 			System.out.println();
 			
@@ -65,7 +75,10 @@ public class UserOperations {
 			System.out.println("20. To update criminal details (with numerrical values");
 			System.out.println("21. To update crime details");
 			
-			int choice = input.nextInt();
+			int choice = scanner.nextInt();
+			
+			System.out.println();
+			System.out.println();
 			
 			switch (choice) {
 			
@@ -132,16 +145,74 @@ public class UserOperations {
 				case 13:{
 					new GetCriminalDataBetweenAge().values();
 				}
+				break;
+				
+				case 14:{
+					new GetCriminalsOfGender().values();
+				}
+				break;
+				
+				case 15:{
+					new TotalCrime().values();
+				}
+				break;
+				
+				case 16:{
+					new TotalCriminal().values();
+				}
+				break;
+				
+				case 17:{
+					new UpdateDepartment01().values();
+				}
+				break;
+				
+				case 18:{
+					new UpdateDepartment02().values();
+				}
+				break;
+				
+				case 19:{
+					new UpdateCriminalDetails01().values();
+				}
+				break;
+				
+				case 20:{
+					new UpdateCriminalDetails02().values();
+				}
+				break;
+				
+				case 21:{
+					new UpdateCrimeDetails().values();
+				}
+				break;
 			}
 			
+//			System.out.println();
+//			System.out.println();
+//			System.out.println("+++++++++++++++++++++++++++++");
+//			System.out.println("+++++++++++++++++++++++++++++");
+//			System.out.println();
+//			System.out.println("Please Select Command");
+//			System.out.println("=====================");
+//			System.out.println("Continue = To make changes in data");
+//			System.out.println("Exit = To stop the application");
+//			System.out.println();
 			
+//			command = scanner.next();
+			
+			System.out.println("++++++++++++++++++++++++++++++");
+			System.out.println("+++++++++++++++++++++++++++++");
 		}
 		
 		System.out.println();
 		System.out.println("...Thankyou for visiting here......");
 		System.out.println("===================================");
 		System.out.println();
-		System.out.println();;
+		System.out.println();
+		
+		scanner.close();
+		
 	}
 
 }

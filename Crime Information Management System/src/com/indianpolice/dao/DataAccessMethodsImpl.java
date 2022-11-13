@@ -310,14 +310,14 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 		
 		try(Connection connection = DataBase.getConnection()){
 			
-			PreparedStatement preparedStatement = connection.prepareStatement("select * from crimedetails where date>='?-?-01' AND date<='?-?-?' having department_id=? order by date");
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from crimedetails where date>='"+year+"-"+month+"-01' AND date<='"+year+"-"+month+"-"+endDate+"' having department_id=? order by date");
 			
 			preparedStatement.setInt(1, year);
 			preparedStatement.setInt(2, month);
 			preparedStatement.setInt(3, year);
 			preparedStatement.setInt(4, month);
 			preparedStatement.setInt(5, endDate);
-			preparedStatement.setInt(6, departmentId);
+			preparedStatement.setInt(1, departmentId);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			

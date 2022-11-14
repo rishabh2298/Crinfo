@@ -312,11 +312,11 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 			
 			PreparedStatement preparedStatement = connection.prepareStatement("select * from crimedetails where date>='"+year+"-"+month+"-01' AND date<='"+year+"-"+month+"-"+endDate+"' having department_id=? order by date");
 			
-			preparedStatement.setInt(1, year);
-			preparedStatement.setInt(2, month);
-			preparedStatement.setInt(3, year);
-			preparedStatement.setInt(4, month);
-			preparedStatement.setInt(5, endDate);
+//			preparedStatement.setInt(1, year);
+//			preparedStatement.setInt(2, month);
+//			preparedStatement.setInt(3, year);
+//			preparedStatement.setInt(4, month);
+//			preparedStatement.setInt(5, endDate);
 			preparedStatement.setInt(1, departmentId);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -718,11 +718,25 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 		
 		try(Connection connection = DataBase.getConnection()){
 			
-			PreparedStatement preparedStatement = connection.prepareStatement(" update department set ?=? where department_id=?");
+			PreparedStatement preparedStatement = null;
 			
-			preparedStatement.setString(1, column);
-			preparedStatement.setString(2, value);
-			preparedStatement.setInt(3, id);
+			if(column.equalsIgnoreCase("area")) {
+				preparedStatement = connection.prepareStatement(" update department set area=? where department_id=?");
+			}
+			else if(column.equalsIgnoreCase("city")) {
+				preparedStatement = connection.prepareStatement(" update department set city=? where department_id=?");
+			}
+			else if(column.equalsIgnoreCase("state")) {
+				preparedStatement = connection.prepareStatement(" update department set state=? where department_id=?");
+			}
+			else if(column.equalsIgnoreCase("zone")) {
+				preparedStatement = connection.prepareStatement(" update department set zone=? where department_id=?");
+			}
+		
+			
+//			preparedStatement.setString(1, column);
+			preparedStatement.setString(1, value);
+			preparedStatement.setInt(2, id);
 			
 			int status = preparedStatement.executeUpdate();
 			
@@ -745,11 +759,11 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 		
 		try(Connection connection = DataBase.getConnection()){
 			
-			PreparedStatement preparedStatement = connection.prepareStatement(" update department set ?=? where department_id=?");
+			PreparedStatement preparedStatement = connection.prepareStatement(" update department set department_id=? where department_id=?");
 			
-			preparedStatement.setString(1, column);
-			preparedStatement.setInt(2, value);
-			preparedStatement.setInt(3, id);
+//			preparedStatement.setString(1, column);
+			preparedStatement.setInt(1, value);
+			preparedStatement.setInt(2, id);
 			
 			int status = preparedStatement.executeUpdate();
 			
@@ -772,12 +786,19 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 		
 		try(Connection connection = DataBase.getConnection()){
 			
-			PreparedStatement preparedStatement = connection.prepareStatement("update criminaldetails set ?=? where name=? AND department_id=?");
+			PreparedStatement preparedStatement = null;
 			
-			preparedStatement.setString(1, column);
-			preparedStatement.setInt(2, value);
-			preparedStatement.setString(3, name);
-			preparedStatement.setInt(4, departmentId);
+			if(column.equalsIgnoreCase("age")) {
+				preparedStatement = connection.prepareStatement("update criminaldetails set age=? where name=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("department_id")) {
+				preparedStatement = connection.prepareStatement("update criminaldetails set department_id=? where name=? AND department_id=?");
+			}
+			
+//			preparedStatement.setString(1, column);
+			preparedStatement.setInt(1, value);
+			preparedStatement.setString(2, name);
+			preparedStatement.setInt(3, departmentId);
 			
 			int status = preparedStatement.executeUpdate();
 			
@@ -802,12 +823,31 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 		
 		try(Connection connection = DataBase.getConnection()){
 			
-			PreparedStatement preparedStatement = connection.prepareStatement("update criminaldetails set ?=? where name=? AND department_id=?");
+			PreparedStatement preparedStatement = null;
 			
-			preparedStatement.setString(1, column);
-			preparedStatement.setString(2, value);
-			preparedStatement.setString(3, name);
-			preparedStatement.setInt(4, departmentId);
+			if(column.equalsIgnoreCase("Name")) {
+				preparedStatement = connection.prepareStatement("update criminaldetails set name=? where name=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("gender")) {
+				preparedStatement = connection.prepareStatement("update criminaldetails set gender=? where name=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("address")) {
+				preparedStatement = connection.prepareStatement("update criminaldetails set gender=? where name=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("identify_marks")) {
+				preparedStatement = connection.prepareStatement("update criminaldetails set identify_marks=? where name=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("arrested_area")) {
+				preparedStatement = connection.prepareStatement("update criminaldetails set arrested_area=? where name=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("crime_type")) {
+				preparedStatement = connection.prepareStatement("update criminaldetails set crime_type=? where name=? AND department_id=?");
+			}
+			
+//			preparedStatement.setString(1, column);
+			preparedStatement.setString(1, value);
+			preparedStatement.setString(2, name);
+			preparedStatement.setInt(3, departmentId);
 			
 			int status = preparedStatement.executeUpdate();
 			
@@ -832,7 +872,32 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 		
 		try(Connection connection = DataBase.getConnection()){
 			
-			PreparedStatement preparedStatement = connection.prepareStatement("update crimedetails set ?=? where victims=? AND main_suspect=? AND department_id=?");
+			PreparedStatement preparedStatement = null;
+			
+			if(column.equalsIgnoreCase("date")) {
+				preparedStatement = connection.prepareStatement("update crimedetails set date=? where victims=? AND main_suspect=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("place")) {
+				preparedStatement = connection.prepareStatement("update crimedetails set place=? where victims=? AND main_suspect=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("crime_type")) {
+				preparedStatement = connection.prepareStatement("update crimedetails set crime_type=? where victims=? AND main_suspect=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("victims")) {
+				preparedStatement = connection.prepareStatement("update crimedetails set victims=? where victims=? AND main_suspect=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("crime_description")) {
+				preparedStatement = connection.prepareStatement("update crimedetails set crime_description=? where victims=? AND main_suspect=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("main_suspect")) {
+				preparedStatement = connection.prepareStatement("update crimedetails set main_suspect=? where victims=? AND main_suspect=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("status")) {
+				preparedStatement = connection.prepareStatement("update crimedetails set status=? where victims=? AND main_suspect=? AND department_id=?");
+			}
+			else if(column.equalsIgnoreCase("department_id")) {
+				preparedStatement = connection.prepareStatement("update crimedetails set department_id=? where victims=? AND main_suspect=? AND department_id=?");
+			}
 			
 			preparedStatement.setString(1, column);
 			preparedStatement.setString(2, value);

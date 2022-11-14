@@ -1,6 +1,5 @@
 package com.indianpolice.operation;
 
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.indianpolice.usecases.AddCrimeDetails;
@@ -72,9 +71,11 @@ public class UserOperations {
 			System.out.println("17. To update department details (with character values)");
 			System.out.println("18. To update department details (with numerical values)");
 			System.out.println("19. To update criminal details (with character values)");
-			System.out.println("20. To update criminal details (with numerrical values");
+			System.out.println("20. To update criminal details (with numerrical values)");
 			System.out.println("21. To update crime details");
+			System.out.println("22. To Exit");
 			
+			System.out.println("Enter your choice");
 			int choice = scanner.nextInt();
 			
 			System.out.println();
@@ -186,6 +187,10 @@ public class UserOperations {
 					new UpdateCrimeDetails().values();
 				}
 				break;
+				
+				case 22:{
+					command = "Exit";
+				}
 			}
 			
 //			System.out.println();
@@ -198,7 +203,7 @@ public class UserOperations {
 //			System.out.println("Continue = To make changes in data");
 //			System.out.println("Exit = To stop the application");
 //			System.out.println();
-			
+//			
 //			command = scanner.next();
 			
 			System.out.println();

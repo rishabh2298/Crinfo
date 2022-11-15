@@ -39,6 +39,8 @@ public interface DataAccessMethods {
 	
 	public abstract List<CriminalDetails> getCriminalOfGender(String gender) throws CriminalDetailsException;
 	
+	public abstract List<Department> totalDepartments() throws DepartmentException;
+	
 	public abstract List<CrimeDetails> totalCrime() throws CrimeDetailsException;
 	
 	public abstract List<CriminalDetails> totalCriminal() throws CriminalDetailsException;

@@ -530,6 +530,46 @@ public class DataAccessMethodsImpl implements DataAccessMethods {
 		return criminals; 
 	}
 
+
+	@Override
+	public List<Department> totalDepartments() throws DepartmentException {
+		
+		int count = 0;
+		
+		List<Department> totalDepartments = new ArrayList<>();
+		
+		try(Connection connection = DataBase.getConnection()){
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("select * from department order by department_id");
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				count++;
+				
+				int departmentId = resultSet.getInt("department_id");
+				String area = resultSet.getString("area");
+				String city = resultSet.getString("city");
+				String state = resultSet.getString("state");
+				String zone = resultSet.getString("zone");
+				
+				Department department = new Department(departmentId, area, city, state, zone);
+				
+				totalDepartments.add(department);
+			
+			}
+			
+		} catch (SQLException e) {
+
+			throw new DepartmentException(e.getMessage());
+		}
+		
+		System.out.println("Total Result = "+count);
+		
+		return totalDepartments;
+	}
+	
 	
 	@Override
 	public List<CrimeDetails> totalCrime() throws CrimeDetailsException {

@@ -18,6 +18,7 @@ import com.indianpolice.usecases.GetFirStatusByVictim;
 import com.indianpolice.usecases.GetMonthlyCrimeReport;
 import com.indianpolice.usecases.TotalCrime;
 import com.indianpolice.usecases.TotalCriminal;
+import com.indianpolice.usecases.TotalDepartment;
 import com.indianpolice.usecases.UpdateCrimeDetails;
 import com.indianpolice.usecases.UpdateCriminalDetails01;
 import com.indianpolice.usecases.UpdateCriminalDetails02;
@@ -66,17 +67,25 @@ public class UserOperations {
 			System.out.println("12. To get Criminal data of specific age");
 			System.out.println("13. To get Criminal data between certain age groups");
 			System.out.println("14. To get Criminal data based on gender");
-			System.out.println("15. To get Total Crime Records");
-			System.out.println("16. To get Total Criminal Records");
-			System.out.println("17. To update department details (with character values)");
-			System.out.println("18. To update department details (with numerical values)");
-			System.out.println("19. To update criminal details (with character values)");
-			System.out.println("20. To update criminal details (with numerrical values)");
-			System.out.println("21. To update crime details");
-			System.out.println("22. To Exit");
+			System.out.println("15. To get Total Department Records");
+			System.out.println("16. To get Total Crime Records");
+			System.out.println("17. To get Total Criminal Records");
+			System.out.println("18. To update department details (with character values)");
+			System.out.println("19. To update department details (with numerical values)");
+			System.out.println("20. To update criminal details (with character values)");
+			System.out.println("21. To update criminal details (with numerrical values)");
+			System.out.println("22. To update crime details");
+			System.out.println("23. To Exit");
 			
 			System.out.println("Enter your choice");
-			int choice = scanner.nextInt();
+			
+			int choice = 0;
+			
+			try {
+				choice = scanner.nextInt();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 			
 			System.out.println();
 			System.out.println();
@@ -84,111 +93,204 @@ public class UserOperations {
 			switch (choice) {
 			
 				case 1:{
-					new AddDepartmentDetails().values();
+					try {
+						new AddDepartmentDetails().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 2:{
-					new AddCrimeDetails().values();
+					try {
+						new AddCrimeDetails().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 3:{
-					new AddCriminalDetails().values();
+					try {
+						new AddCriminalDetails().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 4:{
-					new GetCriminalDetails().values();
+					try {
+						new GetCriminalDetails().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 5:{
-					new GetCrimeDetails().values();
+					try {
+						new GetCrimeDetails().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 6:{
-					new GetCrimeRecord().values();
+					try {
+						new GetCrimeRecord().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 7:{
-					new GetCriminalRecord().values();
+					try {
+						new GetCriminalRecord().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 8:{
-					new GetFirStatusByVictim().values();
+					try {
+						new GetFirStatusByVictim().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 9:{
-					new GetFirStatusByDate().values();
+					try {
+						new GetFirStatusByDate().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 10:{
-					new GetMonthlyCrimeReport().values();
+					try {
+						new GetMonthlyCrimeReport().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 11:{
-					new GetCrimeStatus().values();
+					try {
+						new GetCrimeStatus().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 12:{
-					new GetCriminalDataOfAge().values();
+					try {
+						new GetCriminalDataOfAge().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 13:{
-					new GetCriminalDataBetweenAge().values();
+					try {
+						new GetCriminalDataBetweenAge().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 14:{
-					new GetCriminalsOfGender().values();
+					try {
+						new GetCriminalsOfGender().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 15:{
-					new TotalCrime().values();
+					try {
+						new TotalDepartment().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 16:{
-					new TotalCriminal().values();
+					try {
+						new TotalCrime().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 17:{
-					new UpdateDepartment01().values();
+					try {
+						new TotalCriminal().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 18:{
-					new UpdateDepartment02().values();
+					try {
+						new UpdateDepartment01().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 19:{
-					new UpdateCriminalDetails01().values();
+					try {
+						new UpdateDepartment02().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 20:{
-					new UpdateCriminalDetails02().values();
+					try {
+						new UpdateCriminalDetails01().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 21:{
-					new UpdateCrimeDetails().values();
+					try {
+						new UpdateCriminalDetails02().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				break;
 				
 				case 22:{
+					try {
+						new UpdateCrimeDetails().values();
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				break;
+				
+				case 23:{
 					command = "Exit";
 				}
 			}
@@ -203,8 +305,12 @@ public class UserOperations {
 //			System.out.println("Continue = To make changes in data");
 //			System.out.println("Exit = To stop the application");
 //			System.out.println();
-//			
-//			command = scanner.next();
+			
+//			try {
+//				command = scanner.next();
+//			} catch (Exception e) {
+//				System.out.println(e.getMessage());
+//			}
 			
 			System.out.println();
 			System.out.println();
